@@ -1,0 +1,20 @@
+# 공통 / API 통신
+requests>=2.31
+pillow>=10.0
+numpy>=1.26
+
+# Jupyter + Jupyter MCP가 붙기 위한 서버 쪽 패키지
+jupyterlab>=4.2
+jupyter-collaboration>=4
+jupyter-mcp-tools
+ipykernel
+
+# 모의 문제 서버
+fastapi>=0.110
+uvicorn>=0.29
+
+# 적대적 공격 / 모델 (CPU). torch는 SETUP.md의 CPU 전용 설치 명령으로 따로 설치
+# torch torchvision  -> pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+torchattacks>=3.5
+onnxruntime>=1.17
+scikit-learn>=1.4
