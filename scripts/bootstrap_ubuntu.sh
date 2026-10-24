@@ -50,9 +50,10 @@ echo "== [5/5] 프로젝트 가상환경 (.venv) =="
 uv venv .venv --python 3.12
 uv pip install --python .venv/bin/python -r requirements.txt
 if [ "$WITH_TORCH" = 1 ]; then
-  echo "  + CPU 전용 torch/torchvision"
+  echo "  + CPU 전용 torch/torchvision + ML 추가 패키지(requirements-ml.txt)"
   uv pip install --python .venv/bin/python torch torchvision \
     --index-url https://download.pytorch.org/whl/cpu
+  uv pip install --python .venv/bin/python -r requirements-ml.txt
 fi
 
 echo

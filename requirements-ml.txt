@@ -1,0 +1,13 @@
+# 적대적 공격 / 모델 유형 전용 패키지. 기본 requirements.txt 와 분리(기본 설치를 가볍게).
+# 설치: scripts/bootstrap_ubuntu.sh --torch  가 torch/torchvision(CPU)와 함께 아래를 깐다.
+#   수동: uv pip install --python .venv/bin/python torch torchvision \
+#           --index-url https://download.pytorch.org/whl/cpu
+#         uv pip install --python .venv/bin/python -r requirements-ml.txt
+
+onnxruntime>=1.17
+scikit-learn>=1.4
+
+# torchattacks 는 requests<2.26 을 과하게 고정해 최신 requests 와 충돌한다.
+# 그래서 기본 포함하지 않고, FGSM/PGD 는 templates/adversarial_attack.py 의 수동 폴백을 쓴다.
+# 정말 torchattacks 가 필요하면 의존성 무시 설치:
+#   uv pip install --python .venv/bin/python --no-deps torchattacks
