@@ -1,22 +1,31 @@
 # 설치와 사용법
 
-## 1. 노트북에 처음 한 번 설치
+## 1. 노트북에 처음 한 번 설치 (Ubuntu / WSL2 / VM)
 
-필요한 것: git, Python 3.12, [uv](https://docs.astral.sh/uv/), Node.js 18+, Claude Code.
-(Windows라면 WSL2 Ubuntu 안에서 하는 걸 권장. 아래 명령이 그대로 동작한다.)
+갓 만든 Ubuntu(또는 WSL2 Ubuntu, VMware·VirtualBox 게스트 포함)에서 아래만 하면 된다.
+선행 도구(uv·Node·Claude Code)와 가상환경까지 `bootstrap_ubuntu.sh`가 한 번에 깐다.
 
 ```bash
+# git·curl 만 먼저 (없을 때). 그 뒤 클론.
+sudo apt update && sudo apt install -y git curl
 git clone https://github.com/chldydgml/2026-acdc_prep.git
 cd 2026-acdc_prep
 
-uv venv .venv --python 3.12
-uv pip install --python .venv/bin/python -r requirements.txt
-# CPU 전용 torch (GPU 버전보다 훨씬 작다)
-uv pip install --python .venv/bin/python torch torchvision --index-url https://download.pytorch.org/whl/cpu
+# 선행 도구 + 가상환경(.venv)을 한 번에. 멱등(다시 돌려도 안전).
+scripts/bootstrap_ubuntu.sh
+# 적대적 이미지(torch) 문제까지 대비하려면:
+scripts/bootstrap_ubuntu.sh --torch
 
 # (선택) ECC 원본 전체를 검색용으로 받기
 scripts/fetch_ecc.sh
 ```
+
+`bootstrap_ubuntu.sh`가 하는 일: apt로 `curl git gnupg` → [uv](https://docs.astral.sh/uv/)(파이썬 3.12 포함)
+→ Node.js 22 LTS(context7 MCP용) → Claude Code(네이티브 설치) → `.venv` 생성 + `requirements.txt` 설치.
+이미 설치된 건 건너뛴다.
+
+> 설치 후 `uv`·`claude` 가 `command not found` 면 **새 터미널**을 열거나 `source $HOME/.local/bin/env`.
+> 수동으로 하고 싶으면 스크립트 내용을 그대로 한 줄씩 실행해도 된다.
 
 ## 2. 매번 풀이 시작할 때
 

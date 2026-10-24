@@ -22,9 +22,10 @@
 - 대회 전략 배경 → **`HANDOFF.md`**
 
 ```bash
-# 설치(최초 1회)
-uv venv .venv --python 3.12
-uv pip install --python .venv/bin/python -r requirements.txt
+# 설치(최초 1회) — Ubuntu/WSL2/VM. 선행도구+가상환경을 한 번에
+sudo apt update && sudo apt install -y git curl
+git clone https://github.com/chldydgml/2026-acdc_prep.git && cd 2026-acdc_prep
+scripts/bootstrap_ubuntu.sh        # 적대적 이미지까지면: --torch
 
 # 켜기 (터미널 2개)
 scripts/start_jupyter.sh   # 터미널 A: 실험실 전원, 끄지 말 것
