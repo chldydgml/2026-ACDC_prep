@@ -12,6 +12,7 @@ ipykernel
 # 모의 문제 서버
 fastapi>=0.110
 uvicorn>=0.29
+python-multipart>=0.0.9   # FastAPI 파일(multipart) 업로드 — 이미지 제출 챌린지에 필요
 
 # 적대적 공격 / 모델(torch, onnxruntime, scikit-learn 등)은 유형 전용이라 기본 설치에서 제외.
 # 필요할 때만: scripts/bootstrap_ubuntu.sh --torch  (또는 requirements-ml.txt 참고)
