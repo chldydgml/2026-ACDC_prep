@@ -12,14 +12,13 @@ cd "$(dirname "$0")/.."
 WITH_TORCH=0
 [ "${1:-}" = "--torch" ] && WITH_TORCH=1
 
-# root가 아니면 sudo, root면 그대로
-SUDO=""
-[ "$(id -u)" -ne 0 ] && SUDO="sudo"
+# root면 그대로, 아니면 sudo 로 실행 (파이프 `| sudo -E bash` 문제 회피)
+run_root() { if [ "$(id -u)" -ne 0 ]; then sudo "$@"; else "$@"; fi; }
 export DEBIAN_FRONTEND=noninteractive
 
 echo "== [1/5] apt 패키지 (curl git gnupg) =="
-$SUDO apt-get update -y
-$SUDO apt-get install -y curl git gnupg
+run_root apt-get update -y
+run_root apt-get install -y curl git gnupg
 
 echo "== [2/5] uv (파이썬 3.12 포함) =="
 if ! command -v uv >/dev/null 2>&1; then
@@ -35,8 +34,8 @@ if command -v node >/dev/null 2>&1; then
   [ "$major" -ge 20 ] && need_node=0
 fi
 if [ "$need_node" = 1 ]; then
-  curl -fsSL https://deb.nodesource.com/setup_22.x | $SUDO -E bash -
-  $SUDO apt-get install -y nodejs
+  curl -fsSL https://deb.nodesource.com/setup_22.x | run_root bash -
+  run_root apt-get install -y nodejs
 fi
 node --version
 
