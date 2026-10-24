@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "jupyter": {
+      "command": "uvx",
+      "args": ["jupyter-mcp-server==2.2.4"],
+      "env": {
+        "JUPYTER_URL": "http://127.0.0.1:8888",
+        "JUPYTER_TOKEN": "acdc-local",
+        "ALLOW_IMG_OUTPUT": "true"
+      }
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@4.4.4"]
+    }
+  }
+}

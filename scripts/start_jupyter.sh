@@ -9,4 +9,5 @@ exec "$PY" -m jupyter lab \
   --ip 127.0.0.1 \
   --port "${JUPYTER_PORT:-8888}" \
   --IdentityProvider.token "${JUPYTER_TOKEN:-acdc-local}" \
-  --ServerApp.root_dir "$(pwd)"
+  --ServerApp.root_dir "$(pwd)" \
+  "$@"   # 예: 컨테이너에서 root로 돌릴 때 --allow-root
