@@ -13,8 +13,5 @@ ipykernel
 fastapi>=0.110
 uvicorn>=0.29
 
-# 적대적 공격 / 모델 (CPU). torch는 SETUP.md의 CPU 전용 설치 명령으로 따로 설치
-# torch torchvision  -> pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-torchattacks>=3.5
-onnxruntime>=1.17
-scikit-learn>=1.4
+# 적대적 공격 / 모델(torch, onnxruntime, scikit-learn 등)은 유형 전용이라 기본 설치에서 제외.
+# 필요할 때만: scripts/bootstrap_ubuntu.sh --torch  (또는 requirements-ml.txt 참고)
